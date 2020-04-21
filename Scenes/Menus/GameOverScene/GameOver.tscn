@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Global/Fonts/BoldCapsPixel.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://Scenes/GUI/Menus/GameOverScene/GameOver.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/Menus/GameOverScene/GameOver.gd" type="Script" id=2]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32

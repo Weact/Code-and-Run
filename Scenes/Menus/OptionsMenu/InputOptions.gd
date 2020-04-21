@@ -1,6 +1,6 @@
 extends MenuOptionsBase
 
-onready var controls_scene = preload("res://Scenes/GUI/Menus/OptionsMenu/Controls/InputMenu.tscn")
+onready var controls_scene = preload("res://Scenes/Menus/OptionsMenu/Controls/InputMenu.tscn")
 onready var children_array = get_children()
 
 func on_pressed():
