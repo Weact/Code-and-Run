@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Global/Tileset/LevelBase.tres" type="TileSet" id=1]
 [ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Levels/Debug/LevelDebug.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/Menus/GUI.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/GameConsole/GameConsole.tscn" type="PackedScene" id=5]
 
 [node name="DebugLevel" type="Node2D"]
 script = ExtResource( 3 )
@@ -37,3 +38,6 @@ __meta__ = {
 
 [node name="GUI" type="CanvasLayer" parent="."]
 script = ExtResource( 4 )
+
+[node name="GameConsole" parent="." instance=ExtResource( 5 )]
+visible = false

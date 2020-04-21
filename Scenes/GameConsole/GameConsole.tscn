@@ -1,0 +1,92 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Global/Fonts/BoldCapsPixel.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Scenes/GameConsole/GameConsole.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/GameConsole/cmd_send_sound.wav" type="AudioStream" id=3]
+[ext_resource path="res://Scenes/GameConsole/close_cmdconsole.png" type="Texture" id=4]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://Global/Fonts/BoldCapsPixel.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 64
+font_data = SubResource( 1 )
+
+[node name="GameConsole" type="Control"]
+pause_mode = 2
+margin_top = -1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorRect" parent="."]
+margin_top = 193.0
+margin_right = 960.0
+margin_bottom = 545.0
+color = Color( 0.196078, 0.196078, 0.196078, 0.784314 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LOG" type="Control" parent="."]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CMDLogs_container" type="ItemList" parent="LOG"]
+modulate = Color( 1, 1, 1, 0.588235 )
+margin_left = 8.0
+margin_top = 201.0
+margin_right = 952.0
+margin_bottom = 465.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Console Input" type="Control" parent="."]
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="CMDInput" type="LineEdit" parent="Console Input"]
+modulate = Color( 1, 1, 1, 0.588235 )
+margin_left = 8.0
+margin_top = 473.0
+margin_right = 952.0
+margin_bottom = 534.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+max_length = 255
+context_menu_enabled = false
+clear_button_enabled = true
+caret_blink = true
+caret_blink_speed = 0.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Console Quit" type="Control" parent="."]
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ConsoleQUIT" type="Button" parent="Console Quit"]
+margin_left = 912.0
+margin_top = 209.0
+margin_right = 948.0
+margin_bottom = 239.0
+icon = ExtResource( 4 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CMDSendingSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -15.0
+pitch_scale = 1.5
