@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://BaseClasses/GameMenuBase.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/GUI/Menus/ScreenTitle/Sounds/MenuOption.wav" type="AudioStream" id=2]
+[ext_resource path="res://Scenes/Menus/Sounds/MenuOption.wav" type="AudioStream" id=2]
 [ext_resource path="res://Global/GUI_theme/transparant_UI_theme.tres" type="Theme" id=3]
 
 [node name="MenuBase" type="Control"]
@@ -33,5 +33,3 @@ alignment = 1
 
 [node name="OptionChoiceSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
-volume_db = -15.0
-pitch_scale = 3.0
