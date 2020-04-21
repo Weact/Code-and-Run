@@ -15,6 +15,7 @@ var profile_azerty = {
 	'move_left': KEY_Q,
 	'move_right': KEY_D,
 	'game_restart': KEY_F1,
+	'display_console': KEY_F2
 }
 
 var profile_qwerty = {
@@ -22,6 +23,7 @@ var profile_qwerty = {
 	'move_left': KEY_A,
 	'move_right': KEY_D,
 	'game_restart': KEY_F1,
+	'display_console': KEY_F2
 }
 
 var profile_custom = profile_azerty
