@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Global/Fonts/BoldCapsPixel.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Scenes/GameConsole/GameConsole.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/GameConsole/cmd_send_sound.wav" type="AudioStream" id=3]
 [ext_resource path="res://Scenes/GameConsole/close_cmdconsole.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/GameConsole/Commands.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/GameConsole/CMD_Scripts/HELP.gd" type="Script" id=6]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://Global/Fonts/BoldCapsPixel.ttf"
@@ -12,7 +14,9 @@ font_path = "res://Global/Fonts/BoldCapsPixel.ttf"
 size = 64
 font_data = SubResource( 1 )
 
-[node name="GameConsole" type="Control"]
+[node name="GameConsole" type="Control" groups=[
+"Console",
+]]
 pause_mode = 2
 margin_top = -1.0
 script = ExtResource( 2 )
@@ -90,3 +94,99 @@ __meta__ = {
 stream = ExtResource( 3 )
 volume_db = -15.0
 pitch_scale = 1.5
+
+[node name="CommandsList" type="Node" parent="."]
+
+[node name="HELP" type="Node" parent="CommandsList"]
+script = ExtResource( 6 )
+cmd_name = "HELP"
+cmd_description = "Display all commands in the console"
+
+[node name="CHEATS" type="Node" parent="CommandsList"]
+script = ExtResource( 5 )
+cmd_name = "CHEATS"
+cmd_description = "Turn on Cheats"
+
+[node name="CLEAR" type="Node" parent="CommandsList"]
+script = ExtResource( 5 )
+cmd_name = "CLEAR"
+cmd_description = "Clear the Console"
+target = "Console"
+target_method = "cmdlog_clear"
+
+[node name="NOCLIP" type="Node" parent="CommandsList"]
+script = ExtResource( 5 )
+cmd_name = "NOCLIP"
+cmd_description = "Grant permission to player to go through walls and godmod"
+cheats_required = true
+target = "Player"
+target_method = "noclip"
+
+[node name="GRAVITY" type="Node" parent="CommandsList"]
+script = ExtResource( 5 )
+cmd_name = "GRAVITY"
+cmd_description = "Set the Player's Gravity"
+cheats_required = true
+target = "Player"
+target_method = "setgravity"
+
+[node name="INFINITEJUMP" type="Node" parent="CommandsList"]
+script = ExtResource( 5 )
+cmd_name = "INFINITEJUMP"
+cmd_description = "Get Infinite Jump"
+cheats_required = true
+target = "Player"
+target_method = "enable_infinitejump"
+
+[node name="NEXTLEVEL" type="Node" parent="CommandsList"]
+script = ExtResource( 5 )
+cmd_name = "NEXTLEVEL"
+cmd_description = "Go to next level"
+cheats_required = true
+
+[node name="PREVIOUSLEVEL" type="Node" parent="CommandsList"]
+script = ExtResource( 5 )
+cmd_name = "PREVIOUSLEVEL"
+cmd_description = "Go to previous level"
+cheats_required = true
+
+[node name="GOTOLEVEL" type="Node" parent="CommandsList"]
+script = ExtResource( 5 )
+cmd_name = "GOTOLEVEL"
+cmd_description = "Go to a specific level"
+cheats_required = true
+
+[node name="DIE" type="Node" parent="CommandsList"]
+script = ExtResource( 5 )
+cmd_name = "DIE"
+cmd_description = "Kill the Player"
+target = "Player"
+target_method = "player_die"
+
+[node name="SPEED" type="Node" parent="CommandsList"]
+script = ExtResource( 5 )
+cmd_name = "SPEED"
+args_number = 1
+cmd_description = "Set the Player's Speed"
+cheats_required = true
+target = "Player"
+target_method = "cmd_setspeed"
+
+[node name="MAXSPEED" type="Node" parent="CommandsList"]
+script = ExtResource( 5 )
+cmd_name = "MAXSPEED"
+args_number = 1
+cmd_description = "Set the Player's Max Speed"
+cheats_required = true
+target = "Player"
+target_method = "cmd_setmaxspeed"
+
+[node name="SAY_SOMETHING" type="Node" parent="CommandsList"]
+script = ExtResource( 5 )
+cmd_name = "SAY_SOMETHING"
+cmd_description = "Make the player saying something"
+target = "Player"
+target_method = "say_something"
+
+[node name="WJAODQK7A9" type="Node" parent="CommandsList"]
+script = ExtResource( 5 )
