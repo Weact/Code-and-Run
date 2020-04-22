@@ -17,7 +17,6 @@ var bounce_wall_timer : Timer
 
 func _ready():
 	init_simulate_inputs()
-	
 	bounce_wall_timer_instance()
 	
 #This function initialize the inputs which will be simulated to "bounce" the player against a wall
@@ -32,7 +31,7 @@ func bounce_wall_timer_instance():
 	bounce_wall_timer = Timer.new()
 	bounce_wall_timer.wait_time = 0.2
 	bounce_wall_timer.one_shot = true
-	bounce_wall_timer.connect("timeout",self,"_on_timer_timeout")
+	var _err = bounce_wall_timer.connect("timeout",self,"_on_timer_timeout")
 	add_child(bounce_wall_timer)	
 
 func _physics_process(_delta):

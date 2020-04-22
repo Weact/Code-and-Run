@@ -106,7 +106,8 @@ var COMMANDS = {
 	}
 }
 
-
+# This function ready will initialize signals and init the console logs
+## init_console_cmdlog : init font size of console's log
 func _ready():
 	self.set_visible(false)
 	var _err
@@ -119,68 +120,44 @@ func _ready():
 func _physics_process(_delta):
 	pass
 
+# Check when a player press "display_console" input (Default: F2).
+## Display the console and pause the game
 func _input(_e):
 	if Input.is_action_just_pressed("display_console"):
 			get_tree().paused = !get_tree().paused
 			self.set_visible(!self.visible)
 
+# Detect when the player type in the console
+## Change the color of his input if it corresponds to any commands listed in the dictionnary
 func _on_cmd_changed(_text):
-	for i in range (COMMANDS.size()):
-		if _text != COMMANDS.values()[i].cmd_name:
-			console_input_node.add_color_override("font_color", Color(1,1,1,1))
-		elif _text == COMMANDS.values()[i].cmd_name:
-			console_input_node.add_color_override("font_color", Color(1,0,1,1))
-			break
+	var cmd_split : Array = _text.to_upper().split(" ")
+	if(find_node(cmd_split[0])):
+		console_input_node.add_color_override("font_color", Color(1,0,1,1))
+	else:
+		console_input_node.add_color_override("font_color", Color(1,1,1,1))
 
+# When the player submit a command
+## Check if it's valid
+### Action it
+#### !!! REFACTORY NEEDED !!!
 func _on_cmd_submitted(cmd : String):
 	if cmd:
 		cmdsendingsound_node.play() #Play a sound when a player enter a command
 		
-		for i in range (COMMANDS.size()):
-			if(cmd.to_upper() == COMMANDS.keys()[i]):
-				if(cheats_enabled == false):
-					if(COMMANDS.values()[i].cheats_required == true):
-						console_cmdlog_node.add_item("#" + console_cmdlog_itemcount as String + " > "+ cmd +" : COMMAND NOT AVAILABLE: CHEATS ARE DISABLED < ".to_lower()) #add the item
-						console_cmdlog_itemcount += 1
-						break
-					else:
-						#START
-						if(cmd.to_upper() == COMMANDS.keys()[0]): # 0 : Help
-							console_cmdlog_node.clear()
-							for j in range (COMMANDS.size()):
-								console_cmdlog_node.add_item(COMMANDS.values()[j].cmd_name + " > " + COMMANDS.values()[j].description .to_lower())
-						elif(cmd.to_upper() == COMMANDS.keys()[1]): # 1 : CHEATS
-							if(!cheats_enabled):
-								cheats_enabled = !cheats_enabled
-								console_cmdlog_node.add_item(" > " + cmd + " : CHEATS ARE NOW ON".to_lower())
-							else:
-								cheats_enabled = !cheats_enabled
-								console_cmdlog_node.add_item(" > " + cmd + " : CHEATS ARE NOW OFF".to_lower())
-						elif(cmd.to_upper() == COMMANDS.keys()[2]): # 2 : CLEAR
-							console_cmdlog_node.clear()
-						#END
-						console_cmdlog_itemcount += 1
-						break
-				else:
-					#START
-					if(cmd.to_upper() == COMMANDS.keys()[0]): # 0 : Help
-						console_cmdlog_node.clear()
-						for j in range (COMMANDS.size()):
-							console_cmdlog_node.add_item(COMMANDS.values()[j].cmd_name + " > " + COMMANDS.values()[j].description .to_lower())
-					elif(cmd.to_upper() == COMMANDS.keys()[1]): # 1 : CHEATS
-						if(!cheats_enabled):
-							cheats_enabled = !cheats_enabled
-							console_cmdlog_node.add_item(" > " + cmd + " : CHEATS ARE NOW ON".to_lower())
-						else:
-							cheats_enabled = !cheats_enabled
-							console_cmdlog_node.add_item(" > " + cmd + " : CHEATS ARE NOW OFF".to_lower())
-					elif(cmd.to_upper() == COMMANDS.keys()[2]): # 2 : CLEAR
-						console_cmdlog_node.clear()
-					#END
-					console_cmdlog_itemcount += 1
-					break
-				console_cmdlog_itemcount += 1
-				break
+		var cmd_split : Array = cmd.to_upper().split(" ") # Separate every words in the commands by a space
+		var node_cmd : Node = find_node(cmd_split[0])
+		# Take the first index's value (commands)
+		# and try to find the corresponding node
+
+		if(node_cmd): # If the node exist
+			if(node_cmd.args_number > 0): # If there is at least 1 required arguments for the cmd
+				if(cmd_split.size() > 1): 	# If the user cmd was followed by at least 1 argument
+											# (means his input is MAYBE correct)
+					for i in range (cmd_split.size()): # We go through the splitted array
+						node_cmd.cmd_args.append(cmd_split[i]) 	# We add every argument to the array of the command
+																# (Even the cmd_name, but it will be handled and ignored later)
+
+			node_cmd.exec_cmd() #We execute the command
 
 		console_input_node.clear() #clear the input field
 
@@ -190,3 +167,9 @@ func _on_consolequit_button_toggled():
 	
 func init_console_cmdlog():
 	console_cmdlog_node.get_font("font").set_size(CONSOLE_CMDLOGS_FONTSIZE)
+
+func console_help():
+	pass
+
+func cmdlog_clear():
+	console_cmdlog_node.clear()

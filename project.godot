@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "Commands",
+"language": "GDScript",
+"path": "res://Scenes/GameConsole/Commands.gd"
+}, {
 "base": "Control",
 "class": "GameConsoleScript",
 "language": "GDScript",
@@ -40,6 +45,7 @@ _global_script_classes=[ {
 "path": "res://Scenes/Player/Scripts/Player.gd"
 } ]
 _global_script_class_icons={
+"Commands": "",
 "GameConsoleScript": "",
 "InputsBase": "",
 "Level": "",
@@ -64,7 +70,6 @@ MENUS="*res://AutoLoads/Menus/menus_autoload.gd"
 window/size/width=960
 window/size/height=540
 window/size/borderless=true
-window/size/fullscreen=true
 window/vsync/use_vsync=false
 window/stretch/mode="2d"
 window/stretch/aspect="keep_width"
