@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Global/Fonts/BoldCapsPixel.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Scenes/GameConsole/GameConsole.gd" type="Script" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://Scenes/GameConsole/close_cmdconsole.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/GameConsole/Commands.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/GameConsole/CMD_Scripts/HELP.gd" type="Script" id=6]
+[ext_resource path="res://Scenes/GameConsole/CMD_Scripts/CLEAR.gd" type="Script" id=7]
+[ext_resource path="res://Scenes/GameConsole/CMD_Scripts/CHEATS.gd" type="Script" id=8]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://Global/Fonts/BoldCapsPixel.ttf"
@@ -14,9 +16,7 @@ font_path = "res://Global/Fonts/BoldCapsPixel.ttf"
 size = 64
 font_data = SubResource( 1 )
 
-[node name="GameConsole" type="Control" groups=[
-"Console",
-]]
+[node name="GameConsole" type="Control"]
 pause_mode = 2
 margin_top = -1.0
 script = ExtResource( 2 )
@@ -103,16 +103,14 @@ cmd_name = "HELP"
 cmd_description = "Display all commands in the console"
 
 [node name="CHEATS" type="Node" parent="CommandsList"]
-script = ExtResource( 5 )
+script = ExtResource( 8 )
 cmd_name = "CHEATS"
-cmd_description = "Turn on Cheats"
+cmd_description = "Turn cheats on"
 
 [node name="CLEAR" type="Node" parent="CommandsList"]
-script = ExtResource( 5 )
+script = ExtResource( 7 )
 cmd_name = "CLEAR"
-cmd_description = "Clear the Console"
-target = "Console"
-target_method = "cmdlog_clear"
+cmd_description = "Clear the console"
 
 [node name="NOCLIP" type="Node" parent="CommandsList"]
 script = ExtResource( 5 )
@@ -125,10 +123,11 @@ target_method = "noclip"
 [node name="GRAVITY" type="Node" parent="CommandsList"]
 script = ExtResource( 5 )
 cmd_name = "GRAVITY"
+args_number = 1
 cmd_description = "Set the Player's Gravity"
 cheats_required = true
 target = "Player"
-target_method = "setgravity"
+target_method = "set_gravity"
 
 [node name="INFINITEJUMP" type="Node" parent="CommandsList"]
 script = ExtResource( 5 )
@@ -160,31 +159,19 @@ cheats_required = true
 script = ExtResource( 5 )
 cmd_name = "DIE"
 cmd_description = "Kill the Player"
+cheats_required = true
 target = "Player"
-target_method = "player_die"
+target_method = "destroy"
 
 [node name="SPEED" type="Node" parent="CommandsList"]
 script = ExtResource( 5 )
 cmd_name = "SPEED"
 args_number = 1
 cmd_description = "Set the Player's Speed"
+cheats_required = true
 target = "Player"
 target_method = "set_speed"
 
-[node name="MAXSPEED" type="Node" parent="CommandsList"]
-script = ExtResource( 5 )
-cmd_name = "MAXSPEED"
-cmd_description = "Set the Player's Max Speed"
-cheats_required = true
-target = "Player"
-target_method = "cmd_setmaxspeed"
-
-[node name="SAY_SOMETHING" type="Node" parent="CommandsList"]
-script = ExtResource( 5 )
-cmd_name = "SAY_SOMETHING"
-cmd_description = "Make the player saying something"
-target = "Player"
-target_method = "say_something"
-
 [node name="WJAODQK7A9" type="Node" parent="CommandsList"]
 script = ExtResource( 5 )
+cheats_required = true

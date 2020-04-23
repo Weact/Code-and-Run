@@ -7,7 +7,7 @@ onready var console_cmdlog_node = get_node("LOG/CMDLogs_container")
 onready var cmdsendingsound_node = get_node("CMDSendingSound")
 onready var console_quit_node = get_node("Console Quit/ConsoleQUIT")
 
-onready var children = get_node("CommandsList").get_children()
+onready var children_cmd = get_node("CommandsList").get_children()
 
 const CONSOLE_CMDLOGS_FONTSIZE : int = 45
 
@@ -117,9 +117,13 @@ func _ready():
 	_err = console_quit_node.connect("pressed", self, "_on_consolequit_button_toggled")
 	_err = console_input_node.connect("text_changed", self, "_on_cmd_changed")
 	
-	for child in children:
+	for child in children_cmd:
 		if "console_cmdlog_node" in child:
 			child.console_cmdlog_node = console_cmdlog_node
+		if "console" in child:
+			child.console = self
+		if "all_cmd" in child:
+			child.all_cmd = children_cmd
 	
 	init_console_cmdlog()
 
@@ -154,14 +158,15 @@ func _on_cmd_submitted(cmd : String):
 		var node_cmd : Node = find_node(cmd_split[0])
 		# Take the first index's value (commands)
 		# and try to find the corresponding node
-
+		
 		if(node_cmd): # If the node exist
+			node_cmd.cmd_args.clear()
 			if(node_cmd.args_number > 0): # If there is at least 1 required arguments for the cmd
 				if(cmd_split.size() > 1): 	# If the user cmd was followed by at least 1 argument
 											# (means his input is MAYBE correct)
 					for i in range (cmd_split.size()): # We go through the splitted array
-						node_cmd.cmd_args.append(cmd_split[i]) 	# We add every argument to the array of the command
-																# (Even the cmd_name, but it will be handled and ignored later)
+						node_cmd.cmd_args.append(cmd_split[i].to_int()) # We add every argument to the array of the command
+																		# (Even the cmd_name, but it will be handled and ignored later)
 
 			node_cmd.exec_cmd() #We execute the command
 
@@ -173,9 +178,3 @@ func _on_consolequit_button_toggled():
 	
 func init_console_cmdlog():
 	console_cmdlog_node.get_font("font").set_size(CONSOLE_CMDLOGS_FONTSIZE)
-
-func console_help():
-	pass
-
-func cmdlog_clear():
-	console_cmdlog_node.clear()

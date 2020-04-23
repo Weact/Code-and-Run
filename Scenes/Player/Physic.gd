@@ -1,7 +1,5 @@
 extends Node
 
-const GRAVITY : int = 30
-
 var attributes_node : Node
 var character_node : KinematicBody2D
 var direction_node : Node
@@ -51,7 +49,7 @@ func _physics_process(_delta):
 	attributes_node.velocity.x = dir * spd
 	
 	# Apply movement
-	attributes_node.velocity.y += GRAVITY
+	attributes_node.velocity.y += attributes_node.gravity
 	attributes_node.velocity = character_node.move_and_slide(attributes_node.velocity, Vector2.UP, false, 4, PI/4, false)
 
 	if(character_node.is_on_floor()):
