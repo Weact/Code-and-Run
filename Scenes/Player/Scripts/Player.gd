@@ -45,19 +45,18 @@ func _ready():
 			child.setup()
 
 func _physics_process(_delta):
-#	print(attributes_node.speed)
+	print(attributes_node.speed)
 	pass
+
 func destroy():
 	GAME.gameover()
 	queue_free()
 
-func say_something():
-	print("Hi guys, How are you tOdAy ?????")
-
 # This function will set the player's speed by a command
-func cmd_setspeed():
-	if(tar_args.size() > 0): # Check if at least 1 argument is in the array
-		var new_speed : int = tar_args[1].to_int() # variable to store the speed argument
-		if(new_speed > 0 and new_speed < attributes_node.MAX_SPEED):
-			attributes_node.set_speed(new_speed) # Change player's speed if the Given New Speed is between the right range
-		tar_args.clear() # Clear the array for new incoming inputs
+func set_speed(new_speed : int):
+	if(new_speed > attributes_node.MIN_SPEED and new_speed < attributes_node.MAX_SPEED):
+		attributes_node.set_speed(new_speed)
+
+func set_gravity(new_gravity : int):
+	if(new_gravity > attributes_node.MIN_GRAVITY and new_gravity < attributes_node.MAX_GRAVITY):
+		attributes_node.set_gravity(new_gravity)
