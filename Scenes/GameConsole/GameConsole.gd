@@ -7,6 +7,8 @@ onready var console_cmdlog_node = get_node("LOG/CMDLogs_container")
 onready var cmdsendingsound_node = get_node("CMDSendingSound")
 onready var console_quit_node = get_node("Console Quit/ConsoleQUIT")
 
+onready var children = get_node("CommandsList").get_children()
+
 const CONSOLE_CMDLOGS_FONTSIZE : int = 45
 
 var cheats_enabled : bool = false
@@ -114,6 +116,10 @@ func _ready():
 	_err = console_input_node.connect("text_entered", self, "_on_cmd_submitted")
 	_err = console_quit_node.connect("pressed", self, "_on_consolequit_button_toggled")
 	_err = console_input_node.connect("text_changed", self, "_on_cmd_changed")
+	
+	for child in children:
+		if "console_cmdlog_node" in child:
+			child.console_cmdlog_node = console_cmdlog_node
 	
 	init_console_cmdlog()
 

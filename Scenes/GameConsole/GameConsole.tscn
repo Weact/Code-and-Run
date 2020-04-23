@@ -168,14 +168,12 @@ script = ExtResource( 5 )
 cmd_name = "SPEED"
 args_number = 1
 cmd_description = "Set the Player's Speed"
-cheats_required = true
 target = "Player"
-target_method = "cmd_setspeed"
+target_method = "set_speed"
 
 [node name="MAXSPEED" type="Node" parent="CommandsList"]
 script = ExtResource( 5 )
 cmd_name = "MAXSPEED"
-args_number = 1
 cmd_description = "Set the Player's Max Speed"
 cheats_required = true
 target = "Player"
