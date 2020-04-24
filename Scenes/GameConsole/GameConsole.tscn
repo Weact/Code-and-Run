@@ -175,3 +175,24 @@ target_method = "set_speed"
 [node name="WJAODQK7A9" type="Node" parent="CommandsList"]
 script = ExtResource( 5 )
 cheats_required = true
+
+[node name="GOLEFT" type="Node" parent="CommandsList"]
+script = ExtResource( 5 )
+cmd_name = "GOLEFT"
+cmd_description = "Make the player move to the left"
+target = "Player"
+target_method = "go_left"
+
+[node name="GORIGHT" type="Node" parent="CommandsList"]
+script = ExtResource( 5 )
+cmd_name = "GORIGHT"
+cmd_description = "Make the player go to the right"
+target = "Player"
+target_method = "go_right"
+
+[node name="JUMP" type="Node" parent="CommandsList"]
+script = ExtResource( 5 )
+cmd_name = "JUMP"
+cmd_description = "Make the player jump"
+target = "Player"
+target_method = "jump"

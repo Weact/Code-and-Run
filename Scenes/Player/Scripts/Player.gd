@@ -9,6 +9,7 @@ onready var direction_node = get_node("Direction")
 onready var inputs_node = get_node("Inputs")
 
 var level_node : Node
+var console : Node
 
 # Get every children of this node
 onready var children_array : Array = get_children()
@@ -45,7 +46,6 @@ func _ready():
 			child.setup()
 
 func _physics_process(_delta):
-	print(attributes_node.speed)
 	pass
 
 func destroy():
@@ -60,3 +60,18 @@ func set_speed(new_speed : int):
 func set_gravity(new_gravity : int):
 	if(new_gravity > attributes_node.MIN_GRAVITY and new_gravity < attributes_node.MAX_GRAVITY):
 		attributes_node.set_gravity(new_gravity)
+
+func go_left():
+	get_tree().paused = !get_tree().paused
+	console.visible = !console.visible
+	physic_node.simulate_left_input()
+
+func go_right():
+	get_tree().paused = !get_tree().paused
+	console.visible = !console.visible
+	physic_node.simulate_right_input()
+
+func jump():
+	get_tree().paused = !get_tree().paused
+	console.visible = !console.visible
+	physic_node.simulate_jump_input()

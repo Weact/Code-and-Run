@@ -134,8 +134,7 @@ func _physics_process(_delta):
 ## Display the console and pause the game
 func _input(_e):
 	if Input.is_action_just_pressed("display_console"):
-			get_tree().paused = !get_tree().paused
-			self.set_visible(!self.visible)
+		open_console()
 
 # Detect when the player type in the console
 ## Change the color of his input if it corresponds to any commands listed in the dictionnary
@@ -171,6 +170,13 @@ func _on_cmd_submitted(cmd : String):
 			node_cmd.exec_cmd() #We execute the command
 
 		console_input_node.clear() #clear the input field
+
+func open_console():
+	get_tree().paused = !get_tree().paused
+	self.set_visible(!self.visible)
+	console_cmdlog_node.clear()
+	console_input_node.grab_focus()
+	console_cmdlog_node.add_item("Type help to see the list of available commands !")
 
 func _on_consolequit_button_toggled():
 	get_tree().paused = !get_tree().paused

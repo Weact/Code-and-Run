@@ -10,6 +10,7 @@ var bounce_available : bool = true
 
 var go_left = InputEventAction.new()
 var go_right = InputEventAction.new()
+var jump_action = InputEventAction.new()
 
 var bounce_wall_timer : Timer
 
@@ -23,6 +24,8 @@ func init_simulate_inputs():
 	go_left.pressed = true
 	go_right.action = "move_right"
 	go_right.pressed = true
+	jump_action.action = "jump"
+	jump_action.pressed = true
 
 #This function init a timer which will be used to be started in order to reset bounce_available state
 func bounce_wall_timer_instance():
@@ -30,7 +33,7 @@ func bounce_wall_timer_instance():
 	bounce_wall_timer.wait_time = 0.2
 	bounce_wall_timer.one_shot = true
 	var _err = bounce_wall_timer.connect("timeout",self,"_on_timer_timeout")
-	add_child(bounce_wall_timer)	
+	add_child(bounce_wall_timer)
 
 func _physics_process(_delta):
 	var dir = direction_node.get_move_direction()
@@ -38,11 +41,11 @@ func _physics_process(_delta):
 	
 	# Compute velocity.
 	if(bounce_available and dir > 0 and character_node.is_on_wall()):
-		Input.parse_input_event(go_left)
+		simulate_left_input()
 		bounce_available = false
 		bounce_wall_timer.start()
 	if(bounce_available and dir < 0 and character_node.is_on_wall()):
-		Input.parse_input_event(go_right)
+		simulate_right_input()
 		bounce_available = false
 		bounce_wall_timer.start()
 		
@@ -57,8 +60,19 @@ func _physics_process(_delta):
 
 func _input(event):
 	if jump_available and event.is_action(inputs_node.input_map["Jump"]):
-		attributes_node.velocity.y = attributes_node.jump_force
+		simulate_jump_input()
 		jump_available = false
 		
 func _on_timer_timeout():
 	bounce_available = true
+
+func simulate_left_input():
+	Input.parse_input_event(go_left)
+
+func simulate_right_input():
+	Input.parse_input_event(go_right)
+
+func simulate_jump_input():
+	if jump_available:
+		attributes_node.velocity.y = attributes_node.jump_force
+		jump_available = false
