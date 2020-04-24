@@ -9,9 +9,12 @@ onready var direction_node = get_node("Direction")
 onready var inputs_node = get_node("Inputs")
 
 var level_node : Node
+var console : Node
 
 # Get every children of this node
 onready var children_array : Array = get_children()
+
+var tar_args : Array
 
 # Class accesors
 func is_class(value: String):
@@ -42,6 +45,33 @@ func _ready():
 		if child.has_method("setup"):
 			child.setup()
 
+func _physics_process(_delta):
+	pass
+
 func destroy():
 	GAME.gameover()
 	queue_free()
+
+# This function will set the player's speed by a command
+func set_speed(new_speed : int):
+	if(new_speed > attributes_node.MIN_SPEED and new_speed < attributes_node.MAX_SPEED):
+		attributes_node.set_speed(new_speed)
+
+func set_gravity(new_gravity : int):
+	if(new_gravity > attributes_node.MIN_GRAVITY and new_gravity < attributes_node.MAX_GRAVITY):
+		attributes_node.set_gravity(new_gravity)
+
+func go_left():
+	get_tree().paused = !get_tree().paused
+	console.visible = !console.visible
+	physic_node.simulate_left_input()
+
+func go_right():
+	get_tree().paused = !get_tree().paused
+	console.visible = !console.visible
+	physic_node.simulate_right_input()
+
+func jump():
+	get_tree().paused = !get_tree().paused
+	console.visible = !console.visible
+	physic_node.simulate_jump_input()

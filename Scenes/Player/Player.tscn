@@ -10,7 +10,9 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 11.4696
 
-[node name="Player" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D" groups=[
+"Player",
+]]
 collision_mask = 0
 script = ExtResource( 2 )
 
@@ -22,8 +24,9 @@ script = ExtResource( 5 )
 
 [node name="Attributes" type="Node" parent="."]
 script = ExtResource( 3 )
-speed = 400
+speed = 300
 jump_force = -600
+gravity = 30
 
 [node name="Inputs" type="Node" parent="."]
 script = ExtResource( 6 )

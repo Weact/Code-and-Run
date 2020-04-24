@@ -10,6 +10,16 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node",
+"class": "Commands",
+"language": "GDScript",
+"path": "res://Scenes/GameConsole/Commands.gd"
+}, {
+"base": "Control",
+"class": "GameConsoleScript",
+"language": "GDScript",
+"path": "res://Scenes/GameConsole/GameConsole.gd"
+}, {
+"base": "Node",
 "class": "InputsBase",
 "language": "GDScript",
 "path": "res://BaseClasses/InputsBase.gd"
@@ -35,6 +45,8 @@ _global_script_classes=[ {
 "path": "res://Scenes/Player/Scripts/Player.gd"
 } ]
 _global_script_class_icons={
+"Commands": "",
+"GameConsoleScript": "",
 "InputsBase": "",
 "Level": "",
 "MenuBase": "",
@@ -92,6 +104,11 @@ move_left={
 move_right={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"unicode":0,"echo":false,"script":null)
+ ]
+}
+display_console={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777245,"unicode":0,"echo":false,"script":null)
  ]
 }
 
